@@ -73,6 +73,7 @@ class Challenge1(Challenge):
             self.count_down -= 1
 
 
+    #Hoc Sinh Implement 
     def student_implementation(self, level):
         result = []
         for i in range(level):
