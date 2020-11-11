@@ -6,8 +6,7 @@ from const import *
 from player import Player
 from challenge1 import Challenge1
 
-#initialize pygame
-pg.init()
+
 
 #create screen
 WIN = pg.display.set_mode((WIDTH,HEIGHT))
@@ -42,7 +41,7 @@ def main():
             player.move(WIN)
         else:
             WIN.blit(BG1,(0,0))
-            challenges[0].do_challenge(WIN)
+            challenges[0].doChallenge(WIN)
 
         
     #     addEnemy()

@@ -2,11 +2,11 @@ class Challenge:
     def __init__(self):
         self.score = 0
     
-    def get_score(self):
+    def getScore(self):
         return self.score
 
-    def do_challenge(self, window):
+    def doChallenge(self, window):
         pass
 
-    def draw_output(self, window):
+    def drawOutput(self, window):
         pass
