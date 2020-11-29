@@ -5,56 +5,46 @@ import random
 from const import *
 from player import Player
 from challenge1 import Challenge1
-
-
+from lec1 import Lecture11, Lecture12
 
 #create screen
 WIN = pg.display.set_mode((WIDTH,HEIGHT))
-pg.display.set_caption("Kim Tu Thap")
-
-
+pg.display.set_caption("CS FOUNDATION")
 
 #main function
 def main():
+    global main_background_state
+    main_background_state = IDLE_STATE
+
     run = True
     clock = pg.time.Clock()
+    #main background
+    is_main_background = True
+    
     #set score
     score = 0
+    # is moving
+    is_moving = False
     #challenge number
-    challenge_num = 0
+    current_challenge = 0
     #create player
     player = Player(20,HEIGHT-PLAYER_HEIGHT-10,PLAYER_IMG)
-    # add random an enemy
+    # add challenges
     challenges = []
+    challenges.append(Lecture11())
+    challenges.append(Lecture12())
     challenges.append(Challenge1())
-    
-    # clean all enemy out of window
-    def cleanEnemy(): # NO NEED FOR THIS
-        pass
-        #nonlocal enemies
-        #enemies = list(filter(lambda enemy: enemy.y < HEIGHT,enemies))
+
 
     # main function to redraw all objects
     def redraw_window():
-        if challenge_num == 0:
+        global main_background_state
+        if is_main_background:
             WIN.blit(BG0,(0,0))
             player.move(WIN)
         else:
             WIN.blit(BG1,(0,0))
-            challenges[0].doChallenge(WIN)
-
-        
-    #     addEnemy()
-    #     #draw score and health
-    #     score_text = main_font.render(f"score: {score}", 1, (255, 255, 255))
-    #     hp_text = main_font.render(f"health: {player.health}", 1, (255, 255, 255))
-
-    #     WIN.blit(score_text, (10, 10))
-    #     WIN.blit(hp_text, (WIDTH - hp_text.get_width() - 10, 10))
-
-    #     for enemy in enemies:
-    #         enemy.move(WIN)
-    #     #cleanEnemy()
+            main_background_state = challenges[current_challenge].doChallenge(WIN)
         pg.display.update()
 
     while run:
@@ -68,9 +58,31 @@ def main():
         keys = pg.key.get_pressed()
         if keys[pg.K_LEFT] and player.x - PLAYER_VELOCITY > 0:
             player.x -= PLAYER_VELOCITY
+            is_moving = True
         if keys[pg.K_RIGHT] and player.x + PLAYER_VELOCITY < WIDTH-PLAYER_WIDTH:
             player.x += PLAYER_VELOCITY
+            is_moving = True
+        if keys[pg.K_SPACE]:
+            if main_background_state == PASSED_CHALLENGE:
+                is_main_background = True
+                main_background_state = IDLE_STATE
+                current_challenge += 1
+                is_moving = False
+            if main_background_state == FAILED_CHALLENGE:
+                is_main_background = True
+                challenges[current_challenge].reset()
+                player.x = 20
+                player.y = HEIGHT-PLAYER_HEIGHT-10
+                is_moving = False
 
-        if player.x >= WIDTH-300:
-            challenge_num = 1
+
+        if is_moving and player.x >= WIDTH-950 and current_challenge == 0:
+            is_main_background = False
+        
+        if is_moving and player.x >= WIDTH-700 and current_challenge == 1:
+            is_main_background = False
+
+        if is_moving and player.x >= WIDTH-450 and current_challenge == 2:
+            is_main_background = False
+
 main()

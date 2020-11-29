@@ -1,5 +1,6 @@
 import pygame as pg
 from const import *
+from s4vsprite import s4vSprite
 black = (0,0,0)
 white = (255,255,255)
 
@@ -8,11 +9,22 @@ class NPC:
         self.sentences = []
         self.current_sen = 0
         self.current_word = 0
-        self.count_down = 10
+        self.count_down = 7
+        self.custom = None
     
+    def setConversation(self,sentences):
+        self.sentences = sentences
+        self.current_sen = 0
+        self.current_word = 0
+    
+    def getConversation(self):
+        return self.sentences
+
     def talk(self, window):
+        if self.custom != None:
+            self.custom.draw(window)
         def drawTalkBox():
-            width = 600
+            width = WIDTH-20
             height = 100
             x = 10
             y = HEIGHT - 130
@@ -28,7 +40,6 @@ class NPC:
         else:
             return False
 
-
     def getNextText(self):
         next_text = ""
         self.countDown()
@@ -39,8 +50,6 @@ class NPC:
         
         if self.current_sen < len(self.sentences) and self.current_word < len(self.sentences[self.current_sen]):
             next_text = self.sentences[self.current_sen][:self.current_word+1]
-            
-            # next_text = self.sentences[self.current_sen][:self.count_down]
         return next_text
 
 
@@ -53,7 +62,7 @@ class NPC:
         if self.count_down > 0:
             self.count_down -= 1
         else:
-            self.count_down = 10
+            self.count_down = 7
 
     def getSentenceNum(self):
         return self.current_sen
