@@ -1,9 +1,6 @@
 
 def lec1_challenge1_implementation() -> str:
-    ### TODO 
-    name = "Minh chua duoc dat ten" # initial
-    name = "Minh ten Trau"
-    return name
+    pass
 
 def lec1_challenge2_implementation(x,y) -> int:
     ### TODO 
