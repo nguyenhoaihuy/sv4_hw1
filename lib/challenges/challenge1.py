@@ -1,13 +1,13 @@
 import pygame as pg
 import time
-from challenge import Challenge
+from challenges.challenge import Challenge
 # from playernpc import PlayerNPC
 from student import *
 # from ainpc import AiNPC
 from const import *
 red = (255,0,0)
 white = (255,255,255)
-class Challenge1(Challenge):    
+class Challenge1(Challenge):
     def __init__(self):
         super().__init__()
         self.ai.setConversation(["[AI]: Ban can ve kim tu thap cap 5","[AI]: Ve nao"])
@@ -17,7 +17,7 @@ class Challenge1(Challenge):
         self.level = 5
         self.count = self.level**2
         self.student_output = hw1_implementation(self.level)
-    
+
     def reset(self):
         self.__init__()
 
@@ -39,7 +39,7 @@ class Challenge1(Challenge):
                     if self.current_count == self.count:
                         self.state = FINISH_STATE
                         pg.draw.rect(window, red, (cube_initial_x+col*(cube_size+margin), cube_initial_y+row*(cube_size+margin), cube_size, cube_size))
-                        
+
 
                     elif self.current_count < self.count:
                         if count == self.current_count:
@@ -74,5 +74,5 @@ class Challenge1(Challenge):
                 row += "*"
             result.append(row)
         return result
-    
-                
+
+

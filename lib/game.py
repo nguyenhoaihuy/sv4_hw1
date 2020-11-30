@@ -4,15 +4,20 @@ import time
 import random
 from const import *
 from player import Player
-from challenge1 import Challenge1
-from lec1 import Lecture11, Lecture12
+from challenges.challenge1 import Challenge1
+from challenges.lec1 import Lecture11, Lecture12
 
 #create screen
 WIN = pg.display.set_mode((WIDTH,HEIGHT))
 pg.display.set_caption("CS FOUNDATION")
 
-#main function
 class Lesson1Game:
+    def __init__(self, lecture1_challenge1_solution, lecture1_challenge2_solution, lecture1_homework1_solution):
+        self.challenges = [
+                Lecture11(),
+                Lecture12(),
+                Challenge1()
+        ]
 
     def start(self):
         global main_background_state
@@ -31,11 +36,6 @@ class Lesson1Game:
         current_challenge = 0
         #create player
         player = Player(20,HEIGHT-PLAYER_HEIGHT-10,PLAYER_IMG)
-        # add challenges
-        challenges = []
-        challenges.append(Lecture11())
-        challenges.append(Lecture12())
-        challenges.append(Challenge1())
 
         # main function to redraw all objects
         def redraw_window():
@@ -45,7 +45,7 @@ class Lesson1Game:
                 player.move(WIN)
             else:
                 WIN.blit(BG1,(0,0))
-                main_background_state = challenges[current_challenge].doChallenge(WIN)
+                main_background_state = self.challenges[current_challenge].doChallenge(WIN)
             pg.display.update()
 
         while run:
@@ -71,7 +71,7 @@ class Lesson1Game:
                     is_moving = False
                 if main_background_state == FAILED_CHALLENGE:
                     is_main_background = True
-                    challenges[current_challenge].reset()
+                    self.challenges[current_challenge].reset()
                     player.x = 20
                     player.y = HEIGHT-PLAYER_HEIGHT-10
                     is_moving = False

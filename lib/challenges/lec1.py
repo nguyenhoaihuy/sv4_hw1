@@ -1,11 +1,11 @@
 import pygame as pg
 import time
-from challenge import Challenge
+from challenges.challenge import Challenge
 from student import *
 from const import *
 red = (255,0,0)
 white = (255,255,255)
-class Lecture11(Challenge):    
+class Lecture11(Challenge):
     def __init__(self):
         super().__init__()
         self.ai.setConversation(["[AI]: Tra loi cau hoi sau de vuot qua thu thach","[AI]: Ban ten gi"])
@@ -34,7 +34,7 @@ class Lecture11(Challenge):
         pass
 
 
-class Lecture12(Challenge):    
+class Lecture12(Challenge):
     def __init__(self):
         super().__init__()
         self.ai.setConversation(["[AI]: Tra loi cau hoi sau de vuot qua thu thach","[AI]: 34 + 56 = ?"])
@@ -59,4 +59,4 @@ class Lecture12(Challenge):
 
     def lec12_solution(self, x, y):
         return x+y
-                
+
