@@ -2,10 +2,10 @@ from lib.game import Lesson1Game
 
 
 def answer_what_is_your_name():
-    return "Zi"
+    return None
 
 def answer_x_plus_y(x, y):
-    return x + y
+    return 0
 
 def answer_draw_a_pyramid(level):
     return []

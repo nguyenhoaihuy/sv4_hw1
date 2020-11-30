@@ -1,22 +1,25 @@
 import pygame as pg
 import time
-from challenges.challenge import Challenge
+from challenges.base_challenge import BaseChallenge
 # from playernpc import PlayerNPC
-from student import *
 # from ainpc import AiNPC
 from const import *
+
+
 red = (255,0,0)
 white = (255,255,255)
-class Challenge1(Challenge):
-    def __init__(self):
-        super().__init__()
+
+class Challenge1(BaseChallenge):
+
+    def __init__(self, student_solution):
+        super().__init__(student_solution)
         self.ai.setConversation(["[AI]: Ban can ve kim tu thap cap 5","[AI]: Ve nao"])
         self.player_npc.setConversation(["[Trau]: Minh biet roi","[Trau]: Cam on"])
         self.count = 0
         self.current_count = 0
         self.level = 5
         self.count = self.level**2
-        self.student_output = hw1_implementation(self.level)
+        self.student_output = student_solution(self.level)
 
     def reset(self):
         self.__init__()
@@ -63,7 +66,6 @@ class Challenge1(Challenge):
                 return False
         return True
 
-
     def hw1_solution(self, level):
         result = []
         for i in range(level):
@@ -74,5 +76,4 @@ class Challenge1(Challenge):
                 row += "*"
             result.append(row)
         return result
-
 

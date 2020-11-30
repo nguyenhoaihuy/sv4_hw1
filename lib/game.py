@@ -14,9 +14,9 @@ pg.display.set_caption("CS FOUNDATION")
 class Lesson1Game:
     def __init__(self, lecture1_challenge1_solution, lecture1_challenge2_solution, lecture1_homework1_solution):
         self.challenges = [
-                Lecture11(),
-                Lecture12(),
-                Challenge1()
+                Lecture11(student_solution=lecture1_challenge1_solution),
+                Lecture12(student_solution=lecture1_challenge2_solution),
+                Challenge1(student_solution=lecture1_homework1_solution)
         ]
 
     def start(self):

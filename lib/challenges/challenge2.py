@@ -1,14 +1,18 @@
 import pygame as pg
 import time
-from challenge import Challenge
+from challenges.base_challenge import BaseChallenge
 from playernpc import PlayerNPC
 from ainpc import AiNPC
 from const import *
+
+
 red = (255,0,0)
 white = (255,255,255)
-class Challenge2(Challenge):    
-    def __init__(self):
-        super().__init__()
+
+class Challenge2(BaseChallenge):
+
+    def __init__(self, student_solution):
+        super().__init__(student_solution)
         self.count = 0
         self.current_count = 0
         self.count_down = 20
@@ -16,23 +20,24 @@ class Challenge2(Challenge):
         self.player_npc = PlayerNPC()
         self.ai = AiNPC()
         self.turn = 0
-        
+        self.student_solution = student_solution
+
 
     def doChallenge(self, window):
         if self.state == CONVERSATION_STATE:
             if self.player_npc.isFinishedTalking() and self.ai.isFinishedTalking():
-                
+
                 self.state = RUN_CHALLENGE_STATE
             elif self.turn == 0:
                 if self.ai.talk(window):
                     self.turn = 1
-    
+
             else:
                 if self.player_npc.talk(window):
                     self.turn = 0
-                
+
         elif self.state == RUN_CHALLENGE_STATE:
-            output = self.student_implementation(5)
+            output = self.student_solution(5)
             self.count = 25
             self.drawOutput(window,output)
 
@@ -72,9 +77,3 @@ class Challenge2(Challenge):
         if self.count_down != 0:
             self.count_down -= 1
 
-
-    #Hoc Sinh Implement 
-    def student_implementation(self, level):
-        result = []
-        return result
-                

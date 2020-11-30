@@ -1,26 +1,30 @@
 import pygame as pg
 import time
-from challenges.challenge import Challenge
+from challenges.base_challenge import BaseChallenge
 from student import *
 from const import *
+
+
 red = (255,0,0)
 white = (255,255,255)
-class Lecture11(Challenge):
-    def __init__(self):
-        super().__init__()
+
+class Lecture11(BaseChallenge):
+
+    def __init__(self, student_solution):
+        super().__init__(student_solution)
         self.ai.setConversation(["[AI]: Tra loi cau hoi sau de vuot qua thu thach","[AI]: Ban ten gi"])
         self.player_npc.setConversation(["[Trau]: Minh biet roi"])
         self.count = 0
         self.current_count = 0
         self.level = 5
         self.count = self.level**2
-        self.student_output = lec1_challenge1_implementation()
+        self.student_output = student_solution()
         player_conversation = self.player_npc.getConversation()
         player_conversation.append("[Trau]: "+str(self.student_output))
         self.player_npc.setConversation
 
     def reset(self):
-        self.__init__()
+        self.__init__(self.student_solution)
 
     def drawOutput(self, window):
         self.state = FINISH_STATE
@@ -34,16 +38,17 @@ class Lecture11(Challenge):
         pass
 
 
-class Lecture12(Challenge):
-    def __init__(self):
-        super().__init__()
+class Lecture12(BaseChallenge):
+
+    def __init__(self, student_solution):
+        super().__init__(student_solution)
         self.ai.setConversation(["[AI]: Tra loi cau hoi sau de vuot qua thu thach","[AI]: 34 + 56 = ?"])
         self.player_npc.setConversation(["[Trau]: Minh biet roi"])
         self.count = 0
         self.current_count = 0
         self.level = 5
         self.count = self.level**2
-        self.student_output = lec1_challenge2_implementation(34,56)
+        self.student_output = student_solution(34,56)
         player_conversation = self.player_npc.getConversation()
         player_conversation.append("[Trau]: "+str(self.student_output))
         self.player_npc.setConversation
