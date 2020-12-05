@@ -18,9 +18,9 @@ class AiNPC(NPC):
             y = HEIGHT - 130
             pg.draw.rect(window, white, (x, y, width, height))
         drawTalkBox()
-        img = font.render("[AI]: Chúc mừng bạn!!!!! <Nhấn Space>", True, black)
+        img = font.render("[AI]: Chuc mung ban!!!!! <Nhan Space>", True, black)
         window.blit(img, (20, HEIGHT - 120))
-    
+
     def reportError(self,window):
         if self.custom != None:
             self.custom.draw(window)
@@ -34,4 +34,4 @@ class AiNPC(NPC):
         img = font.render("[AI]: Chia buon, ban chua vuot qua thu thach! <Nhan Space>", True, black)
         window.blit(img, (20, HEIGHT - 120))
 
-    
+

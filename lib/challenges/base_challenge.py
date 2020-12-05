@@ -27,12 +27,17 @@ class BaseChallenge:
             self.drawOutput(window)
         else:
             self.drawOutput(window)
-            if self.checkResult():
-                self.ai.congrat(window)
-                return PASSED_CHALLENGE
-            else:
+            try:
+                if self.checkResult():
+                    self.ai.congrat(window)
+                    return PASSED_CHALLENGE
+                else:
+                    self.ai.reportError(window)
+                    return FAILED_CHALLENGE
+            except:
                 self.ai.reportError(window)
                 return FAILED_CHALLENGE
+
         return self.state
 
     def showCommunication(self,window):

@@ -1,5 +1,6 @@
 import pygame as pg
 import time
+from random import randint
 from challenges.base_challenge import BaseChallenge
 from const import *
 
@@ -11,8 +12,8 @@ class Lecture11(BaseChallenge):
 
     def __init__(self, student_solution):
         super().__init__(student_solution)
-        self.ai.setConversation(["[AI]: Tra loi cau hoi sau de vuot qua thu thach","[AI]: Ban ten gi"])
-        self.player_npc.setConversation(["[Trau]: Minh biet roi"])
+        self.ai.setConversation(["[AI]: Tra loi cau hoi sau de vuot qua thu thach","[AI]: Ban ten gi?"])
+        self.player_npc.setConversation(["[Trau]: Minh da san sang"])
         self.count = 0
         self.current_count = 0
         self.level = 5
@@ -29,25 +30,27 @@ class Lecture11(BaseChallenge):
         self.state = FINISH_STATE
 
     def checkResult(self):
-        if len(self.student_output) != 0 and self.student_output != "Minh chua duoc dat ten":
-            return True
-        return False
-
-    def lec11_solution(self, level):
-        pass
-
+        input = [[]]
+        expected_output = ["Trau"]
+        actual_output = list(map(lambda args: self.student_solution(*args), input))
+        return expected_output == actual_output
 
 class Lecture12(BaseChallenge):
 
     def __init__(self, student_solution):
         super().__init__(student_solution)
-        self.ai.setConversation(["[AI]: Tra loi cau hoi sau de vuot qua thu thach","[AI]: 34 + 56 = ?"])
-        self.player_npc.setConversation(["[Trau]: Minh biet roi"])
+        self.x = randint(-100, 100)
+        self.y = randint(-100, 100)
+        self.ai.setConversation([
+            "[AI]: Tra loi cau hoi sau de vuot qua thu thach",
+            f"[AI]: x = {self.x}, y = {self.y}. x + y = ?"
+        ])
+        self.player_npc.setConversation(["[Trau]: Minh da san sang!"])
         self.count = 0
         self.current_count = 0
         self.level = 5
         self.count = self.level**2
-        self.student_output = student_solution(34,56)
+        self.student_output = student_solution(self.x, self.y)
         player_conversation = self.player_npc.getConversation()
         player_conversation.append("[Trau]: "+str(self.student_output))
         self.player_npc.setConversation
@@ -56,11 +59,7 @@ class Lecture12(BaseChallenge):
         self.state = FINISH_STATE
 
     def checkResult(self):
-        if self.lec12_solution(34,56) == self.student_output:
-            return True
-        return False
-
-
-    def lec12_solution(self, x, y):
-        return x+y
-
+        input = [[34, 56], [12, -3]]
+        expected_output = [90, 9]
+        actual_output = list(map(lambda args: self.student_solution(*args), input))
+        return expected_output == actual_output
