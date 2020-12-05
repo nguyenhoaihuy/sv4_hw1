@@ -1,7 +1,6 @@
 import pygame as pg
 import time
 from challenges.base_challenge import BaseChallenge
-from student import *
 from const import *
 
 
