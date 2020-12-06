@@ -8,10 +8,12 @@ from challenge1 import Challenge1
 from lec1 import Lecture11, Lecture12
 from door import Door
 from ground import Ground
+from intro import *
 
 #create screen
 WIN = pg.display.set_mode((WIDTH,HEIGHT))
 pg.display.set_caption("CS FOUNDATION")
+pygame.mixer.music.load('assets/Infoscape.mp3')
 
 #main function
 def main():
@@ -71,6 +73,9 @@ def main():
     doors.append(door6)
     doors.append(door7)
     
+    # start intro
+    start_intro(WIN,WIDTH,HEIGHT)
+    pygame.mixer.music.play(-1, 0.0)
     # main function to redraw all objects
     def redraw_window():
         global main_background_state
