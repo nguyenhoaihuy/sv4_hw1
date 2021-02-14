@@ -20,7 +20,7 @@ class AiNPC(NPC):
         drawTalkBox()
         img = font.render("[AI]: Chuc mung ban!!!!! <Nhan Space>", True, black)
         window.blit(img, (20, HEIGHT - 120))
-    
+
     def reportError(self,window):
         if self.custom != None:
             self.custom.draw(window)
@@ -34,4 +34,4 @@ class AiNPC(NPC):
         img = font.render("[AI]: Chia buon, ban chua vuot qua thu thach! <Nhan Space>", True, black)
         window.blit(img, (20, HEIGHT - 120))
 
-    
+
